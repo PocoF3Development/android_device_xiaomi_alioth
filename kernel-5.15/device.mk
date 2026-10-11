@@ -4,6 +4,8 @@
 PRODUCT_SOURCE_ROOT_DIRS += -kernel-research
 include device/xiaomi/alioth/kernel-5.15/selection.mk
 ifeq ($(TARGET_USE_ALIOTH_KERNEL_515),true)
+# Native 5.15 uses UFS BSG, rather than the removed vendor query ioctl.
+$(call soong_config_set_bool,QTI_GPT_UTILS,USE_BSG_FRAMEWORK,true)
 PRODUCT_PACKAGES += toolbox_vendor
 PRODUCT_COPY_FILES += \
     device/xiaomi/alioth/kernel-5.15/init.alioth.modules.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.alioth.modules.rc
