@@ -1,0 +1,3 @@
+/dts-v1/;
+/plugin/;
+/ { qcom,board-id = <44 0>; fragment@0 { target-path = "/"; __overlay__ { qcom,board-id = <44 0>; model = "Xiaomi alioth 5.15 development boot test"; }; }; };
