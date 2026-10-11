@@ -8,4 +8,4 @@ Use the existing `lineage_alioth-cp2a-user` lunch target for the default 5.15 pr
 
 No full ROM build or device boot is established by a Makefile parse. Do not claim production readiness until device boot, storage decryption and peripheral/vendor interfaces pass hardware tests.
 
-Normal boot loads all matching modules; recovery and charger retain the first-stage subset. See the bringup repository ROM_COMPATIBILITY.md and legacy path inventory for outstanding vendor contracts.
+First-stage init loads the essential subset in every mode. Normal system boot loads the complete matching set from /vendor/lib/modules after mounts, using toolbox_vendor and the existing vendor_modprobe SELinux domain. Recovery and charger retain the first-stage subset. See the bringup repository ROM_COMPATIBILITY.md and legacy path inventory for outstanding vendor contracts.

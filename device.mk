@@ -72,3 +72,6 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Inherit from vendor blobs
 $(call inherit-product, vendor/xiaomi/alioth/alioth-vendor.mk)
+
+# Matching 5.15 vendor module loader (explicit false restores donor profile).
+include device/xiaomi/alioth/kernel-5.15/device.mk

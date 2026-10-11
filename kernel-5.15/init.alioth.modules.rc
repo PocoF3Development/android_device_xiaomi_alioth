@@ -1,0 +1,12 @@
+# Firmware partitions are mounted by fs/late-fs before post-fs-data.
+# Block subsequent init actions until the dependency-aware loader completes.
+on post-fs-data
+    exec_start vendor.alioth-modules
+
+service vendor.alioth-modules /vendor/bin/modprobe --all=/vendor/lib/modules/modules.load
+    class core
+    user root
+    group root
+    seclabel u:r:vendor_modprobe:s0
+    disabled
+    oneshot
