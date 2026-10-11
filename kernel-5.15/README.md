@@ -40,3 +40,12 @@ the existing donor 4.19 source profile. Other values are rejected. The 5.15 prof
 requires the alioth virtual-A/B vendor_boot layout, refuses missing dependencies,
 and does not fall back to stale prebuilts. The temporary debug configuration
 includes permissive SELinux; it is not intended for production.
+
+After an Android source build, verify both the kernel/module outputs and the packaged images:
+
+```sh
+python3 device/xiaomi/alioth/kernel-5.15/validate-source-build.py --root "$PWD"
+python3 device/xiaomi/alioth/kernel-5.15/validate-source-images.py --root "$PWD"
+```
+
+The image validator independently unpacks the boot images, compares the embedded kernel configuration and native DTB/overlay, verifies all 206 vendor-ramdisk modules and metadata, and checks AVB image signatures. These checks do not establish successful hardware boot.
