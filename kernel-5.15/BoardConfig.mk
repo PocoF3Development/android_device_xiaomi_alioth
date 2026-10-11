@@ -1,6 +1,8 @@
 # Experimental source-built alioth 5.15; not production ready.
 include device/xiaomi/alioth/kernel-5.15/selection.mk
 ifeq ($(TARGET_USE_ALIOTH_KERNEL_515),true)
+# Native 5.15 uses UFS BSG, rather than the removed vendor query ioctl.
+$(call soong_config_set_bool,QTI_GPT_UTILS,USE_BSG_FRAMEWORK,true)
 ifneq ($(TARGET_IS_VAB),true)
 $(error Alioth 5.15 requires the vendor_boot / VAB partition layout)
 endif
