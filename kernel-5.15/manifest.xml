@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <manifest>
   <remote name="poco515" fetch="https://github.com/PocoF3Development" />
-  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="701588c5950cd9b00e7683ab3bb148bdbe852c98" upstream="refs/heads/alioth-5.15" />
+  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="ac0f554966e2417caf6667c31482f6af782291b5" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_audio-kernel-legacy-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/audio-kernel/legacy" remote="poco515" revision="0d40c9bb46c5acdb05af2278426befafc4ba8f48" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_display-drivers-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/display-drivers" remote="poco515" revision="70b9f59eb9135889ac3f628281696eca30f97bf6" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_graphics-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/graphics-kernel" remote="poco515" revision="ef94d4a443ec4de183a709a82b5dc9833b73428e" upstream="refs/heads/alioth-5.15" />
