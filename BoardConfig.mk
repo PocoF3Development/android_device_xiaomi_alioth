@@ -30,5 +30,5 @@ include vendor/xiaomi/alioth/BoardConfigVendor.mk
 # Device-local Health service executable label.
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
-# Opt-in development kernel profile, applied after vendor defaults.
+# Default development kernel profile, applied after vendor defaults.
 include $(DEVICE_PATH)/kernel-5.15/BoardConfig.mk

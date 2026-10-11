@@ -1,5 +1,6 @@
 # Experimental alioth 5.15 integration; not production ready.
-# Enable with TARGET_USE_ALIOTH_KERNEL_515=true after exporting a matching bundle.
+# Default for alioth; set TARGET_USE_ALIOTH_KERNEL_515=false for the donor kernel.
+TARGET_USE_ALIOTH_KERNEL_515 ?= true
 ifeq ($(TARGET_USE_ALIOTH_KERNEL_515),true)
 ifneq ($(TARGET_IS_VAB),true)
 $(error Alioth 5.15 profile requires the vendor_boot / VAB partition layout)
