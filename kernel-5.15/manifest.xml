@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <manifest>
   <remote name="poco515" fetch="https://github.com/PocoF3Development" />
-  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="07b07474d0d88cc7cd59f4feb1c45e7be752062b" upstream="refs/heads/alioth-5.15" />
-  <project name="android_vendor_qcom_opensource_audio-kernel-legacy-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/audio-kernel/legacy" remote="poco515" revision="0d40c9bb46c5acdb05af2278426befafc4ba8f48" upstream="refs/heads/alioth-5.15" />
-  <project name="android_vendor_qcom_opensource_display-drivers-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/display-drivers" remote="poco515" revision="70b9f59eb9135889ac3f628281696eca30f97bf6" upstream="refs/heads/alioth-5.15" />
-  <project name="android_vendor_qcom_opensource_graphics-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/graphics-kernel" remote="poco515" revision="ef94d4a443ec4de183a709a82b5dc9833b73428e" upstream="refs/heads/alioth-5.15" />
+  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="67e836f4cb83d019a050635cd23adfcb831a4335" upstream="refs/heads/alioth-5.15" />
+  <project name="android_vendor_qcom_opensource_audio-kernel-legacy-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/audio-kernel/legacy" remote="poco515" revision="68681c5a2229f50035bcda08c394ac8ad637ff44" upstream="refs/heads/alioth-5.15" />
+  <project name="android_vendor_qcom_opensource_display-drivers-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/display-drivers" remote="poco515" revision="c27eac18a0e8bbf0f086af7deb5cc62a94b47c1c" upstream="refs/heads/alioth-5.15" />
+  <project name="android_vendor_qcom_opensource_graphics-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/graphics-kernel" remote="poco515" revision="de2f798c8e7e3e74545b5d76835afe320af85746" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_securemsm-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/securemsm-kernel" remote="poco515" revision="66e3745f656b59f23ebe8574f89fb04156ece064" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_mm-drivers-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/mm-drivers" remote="poco515" revision="218b6215871041624f18b98d1bbae66a5bc65107" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_camera-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/camera-kernel" remote="poco515" revision="a3ae4270bdee7609a8dc88bcca6cab7297ed398e" upstream="refs/heads/alioth-5.15" />
@@ -12,8 +12,8 @@
   <project name="android_vendor_qcom_opensource_wlan_qcacld-3.0-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/qcacld-3.0" remote="poco515" revision="deda49e9322bb4052dc3aa41f5cab0fdf52dea83" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_wlan_fw-api-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/fw-api" remote="poco515" revision="08ea2d03009a649df9e40e59ddd8dff18be9e9eb" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_wlan_qca-wifi-host-cmn-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/qca-wifi-host-cmn" remote="poco515" revision="3c8ca5725fb76ba31e9554a23dea1569a1a4eec9" upstream="refs/heads/alioth-5.15" />
-  <project name="android_device_xiaomi_alioth" path="device/xiaomi/alioth" remote="poco515" revision="refs/heads/alioth-5.15-integration">
+  <project name="android_device_xiaomi_alioth" path="device/xiaomi/alioth" remote="poco515" revision="be32d7b86a650c8f35b243a07ccad9afd9136d46">
     <copyfile src="kernel-5.15/ResearchAndroid.mk" dest="kernel-research/alioth-5.15/Android.mk" />
   </project>
-  <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common" remote="poco515" revision="refs/heads/alioth-5.15-integration" />
+  <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common" remote="poco515" revision="848dece690ea1373e08c4fa25157035618f037bd" />
 </manifest>
