@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <manifest>
   <remote name="poco515" fetch="https://github.com/PocoF3Development" />
-  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="4c19a131a42f3d7193b8817db96fa32f7629c18d" upstream="refs/heads/alioth-5.15" />
+  <project name="android_kernel_xiaomi_sm8250-5.15" path="kernel-research/alioth-5.15/msm-kernel" remote="poco515" revision="2ca0323da599fea5b9b4ea20331d81418f913a6e" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_audio-kernel-legacy-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/audio-kernel/legacy" remote="poco515" revision="60d68b44941cd38845701c511ca9428363db6b34" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_display-drivers-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/display-drivers" remote="poco515" revision="c27eac18a0e8bbf0f086af7deb5cc62a94b47c1c" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_graphics-kernel-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/graphics-kernel" remote="poco515" revision="de2f798c8e7e3e74545b5d76835afe320af85746" upstream="refs/heads/alioth-5.15" />
@@ -18,9 +18,9 @@
   <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common" remote="poco515" revision="cf633a738f95c2c53de62537e3937356252c944e" />
   <remove-project path="hardware/qcom-caf/bootctrl" optional="true" />
   <project name="android_hardware_qcom_bootctrl-5.15" path="hardware/qcom-caf/bootctrl" remote="poco515" revision="ca6681cc5afcc712a24f4da64f54f4bf815ac7d0" upstream="refs/heads/alioth-5.15" />
-  <project name="android_vendor_qcom_opensource_video-driver-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/video-driver" remote="poco515" revision="b1508e349859a844f4c94901da695caee184af07" upstream="refs/heads/alioth-5.15" />
+  <project name="android_vendor_qcom_opensource_video-driver-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/video-driver" remote="poco515" revision="39850774e3469d331a18a92077eca1a107e9f49c" upstream="refs/heads/alioth-5.15" />
   <remove-project path="hardware/qcom-caf/sm8250/display" optional="true" />
   <project name="android_hardware_qcom_display-sm8250-5.15" path="hardware/qcom-caf/sm8250/display" remote="poco515" revision="b7374b57f8dcd52fbbbdc14b1d200a0e015efe1e" upstream="refs/heads/alioth-5.15" />
   <remove-project path="vendor/lineage" optional="true" />
-  <project name="android_vendor_lineage-5.15" path="vendor/lineage" remote="poco515" revision="74104311d5a277e3c3f51400e33c61055632ad74" upstream="refs/heads/alioth-5.15" />
+  <project name="android_vendor_lineage-5.15" path="vendor/lineage" remote="poco515" revision="b8e9fe4fbca3d9c2143c506140e39d1529205d37" upstream="refs/heads/alioth-5.15" />
 </manifest>

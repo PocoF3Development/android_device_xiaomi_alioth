@@ -48,6 +48,46 @@ for partition in ['vendor', 'vendor_ramdisk']:
             if suffix == 'recovery':
                 assert mode_load == [name.removesuffix('.ko') for name in expected]
 assert modules['vendor'] == modules['vendor_ramdisk']
+# Check every partition tree, not only the two intended module directories.
+partition_module_counts = {}
+for partition in ['system', 'system_ext', 'product', 'vendor', 'odm',
+                  'system_dlkm', 'vendor_dlkm', 'vendor_ramdisk']:
+    files = list((product / partition).rglob('*.ko'))
+    partition_module_counts[partition] = len(files)
+    if partition not in modules:
+        assert not files, (partition, 'unexpected kernel module placement')
+    for file in files:
+        assert file.parent == product / partition / 'lib/modules', file
+        assert run(['modinfo', '-F', 'vermagic', file]).split()[0] == release, file
+
+normalize = lambda name: name.removesuffix('.ko').replace('_', '-')
+builtins = {normalize(Path(name).name) for name in
+            (out / 'modules.builtin').read_text().splitlines()}
+for partition in modules:
+    directory = product / partition / 'lib/modules'
+    prefix = '/vendor/lib/modules/' if partition == 'vendor' else '/lib/modules/'
+    dependencies = {}
+    for line in (directory / 'modules.dep').read_text().splitlines():
+        module, dependency_list = line.split(':', 1)
+        assert module.startswith(prefix), (partition, module)
+        assert Path(module).name in expected, (partition, module)
+        dependencies[Path(module).name] = dependency_list.split()
+        for dependency in dependency_list.split():
+            assert dependency.startswith(prefix), (partition, dependency)
+            assert Path(dependency).name in expected, (partition, dependency)
+    assert set(dependencies) == set(expected), partition
+    for name in ['modules.builtin', 'modules.builtin.modinfo']:
+        assert (directory / name).read_bytes() == (out / name).read_bytes(), (partition, name)
+    available = {normalize(name) for name in expected} | builtins
+    for line in (directory / 'modules.softdep').read_text().splitlines():
+        if not line.startswith('softdep '):
+            continue
+        words = line.split()
+        assert normalize(words[1]) in available, (partition, line)
+        for dependency in words[2:]:
+            if dependency not in ('pre:', 'post:'):
+                assert normalize(dependency) in available, (partition, line)
+
 source_v = research / 'sources/vendor/qcom/opensource'
 staging = json.loads((out / 'external-source-staging.json').read_text())
 v = Path(staging['staged_root']).resolve()
@@ -69,6 +109,6 @@ symvers = stage / 'Module.symvers'
 symvers.write_bytes((out / 'Module.symvers').read_bytes()+b''.join((v / group / 'Module.symvers').read_bytes() for group in groups))
 result = subprocess.run(['depmod', '-e', '-E', str(symvers), '-b', str(stage), release], text=True, capture_output=True)
 assert result.returncode == 0 and not result.stderr.strip(), result.stderr
-report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'none', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'first_stage_modules': early, 'external_source_staging': staging, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
+report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'none', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'partition_module_counts': partition_module_counts, 'dependency_paths_and_softdeps_validated': True, 'first_stage_modules': early, 'external_source_staging': staging, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
 (research / 'android-source-build-validation.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))
