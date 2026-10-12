@@ -23,6 +23,9 @@ ALIOTH_KERNEL_515_REQUIRED_FILES := $(addprefix $(TARGET_KERNEL_CLANG_PATH)/bin/
 $(foreach file,$(ALIOTH_KERNEL_515_REQUIRED_FILES),$(if $(wildcard $(file)),,$(error Missing 5.15 build dependency $(file); sync kernel-5.15/manifest.xml)))
 TARGET_KERNEL_EXT_MODULE_ROOT := $(ALIOTH_KERNEL_515_PATH)
 TARGET_KERNEL_EXT_MODULES := external
+# Bring-up only: global permissive applies to Android and recovery.
+# The selected kernel also clamps attempts to enable enforcement.
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive enforcing=0
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
