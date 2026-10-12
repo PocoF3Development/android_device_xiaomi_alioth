@@ -23,6 +23,9 @@ ALIOTH_KERNEL_515_REQUIRED_FILES := $(addprefix $(TARGET_KERNEL_CLANG_PATH)/bin/
 $(foreach file,$(ALIOTH_KERNEL_515_REQUIRED_FILES),$(if $(wildcard $(file)),,$(error Missing 5.15 build dependency $(file); sync kernel-5.15/manifest.xml)))
 TARGET_KERNEL_EXT_MODULE_ROOT := $(ALIOTH_KERNEL_515_PATH)
 TARGET_KERNEL_EXT_MODULES := external
+# The native DWC3 child node is usb@a600000; preserve the legacy fallback.
+BOARD_KERNEL_CMDLINE := $(filter-out androidboot.usbcontroller=%,$(BOARD_KERNEL_CMDLINE))
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a600000.usb
 # Bring-up only: global permissive applies to Android and recovery.
 # The selected kernel also clamps attempts to enable enforcement.
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive enforcing=0
