@@ -12,7 +12,7 @@
   <project name="android_vendor_qcom_opensource_wlan_qcacld-3.0-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/qcacld-3.0" remote="poco515" revision="4a09d1a63186d8712da30326dd5d553c40ebd5e9" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_wlan_fw-api-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/fw-api" remote="poco515" revision="08ea2d03009a649df9e40e59ddd8dff18be9e9eb" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_wlan_qca-wifi-host-cmn-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/wlan/qca-wifi-host-cmn" remote="poco515" revision="7b27401309762e5f72ce859e6fdb68e274e248c2" upstream="refs/heads/alioth-5.15" />
-  <project name="android_device_xiaomi_alioth" path="device/xiaomi/alioth" remote="poco515" revision="c646538f4405c20099d3343a40e0a38103be5d01">
+  <project name="android_device_xiaomi_alioth" path="device/xiaomi/alioth" remote="poco515" revision="27927c10c4501338cd63d908b327d61423fef61a">
     <copyfile src="kernel-5.15/ResearchAndroid.mk" dest="kernel-research/alioth-5.15/Android.mk" />
   </project>
   <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common" remote="poco515" revision="135ac452039df552f3aa7a5284ffb35f1b8b4189" />
