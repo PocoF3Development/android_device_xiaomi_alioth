@@ -15,8 +15,8 @@ def run(args):
 def digest(file):
     return hashlib.sha256(file.read_bytes()).hexdigest()
 config = (out / '.config').read_text()
-assert 'CONFIG_LTO_NONE=y\n' in config
-assert 'CONFIG_LTO_CLANG_THIN=y\n' not in config
+assert 'CONFIG_LTO_NONE=y\n' not in config
+assert 'CONFIG_LTO_CLANG_THIN=y\n' in config
 assert 'CONFIG_LTO_CLANG_FULL=y\n' not in config
 assert 'r563880c' in config and 'clang version 21.0.0' in config
 image = out / 'arch/arm64/boot/Image'
@@ -109,6 +109,6 @@ symvers = stage / 'Module.symvers'
 symvers.write_bytes((out / 'Module.symvers').read_bytes()+b''.join((v / group / 'Module.symvers').read_bytes() for group in groups))
 result = subprocess.run(['depmod', '-e', '-E', str(symvers), '-b', str(stage), release], text=True, capture_output=True)
 assert result.returncode == 0 and not result.stderr.strip(), result.stderr
-report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'none', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'partition_module_counts': partition_module_counts, 'dependency_paths_and_softdeps_validated': True, 'first_stage_modules': early, 'external_source_staging': staging, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
+report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'thin', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'partition_module_counts': partition_module_counts, 'dependency_paths_and_softdeps_validated': True, 'first_stage_modules': early, 'external_source_staging': staging, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
 (research / 'android-source-build-validation.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))

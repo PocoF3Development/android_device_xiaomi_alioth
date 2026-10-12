@@ -39,7 +39,8 @@ assert image.read_bytes() == (obj/'arch/arm64/boot/Image').read_bytes(), 'packag
 config = run(['bash', kernel/'scripts/extract-ikconfig', image])
 assert config == (obj/'.config').read_bytes(), 'embedded configuration mismatch'
 assert b'Linux/arm64 5.15.206' in config and b'clang version 21.0.0' in config
-assert b'CONFIG_LTO_NONE=y\n' in config
+assert b'CONFIG_LTO_CLANG_THIN=y\n' in config
+assert b'CONFIG_LTO_NONE=y\n' not in config
 assert b'CONFIG_SECURITY_SELINUX_FORCE_PERMISSIVE=y\n' in config
 assert b'CONFIG_SECURITY_SELINUX_DEVELOP=y\n' in config
 # Check the actual header arguments, rather than only the makefile.
