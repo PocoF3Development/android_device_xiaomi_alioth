@@ -19,4 +19,6 @@
   <remove-project path="hardware/qcom-caf/bootctrl" optional="true" />
   <project name="android_hardware_qcom_bootctrl-5.15" path="hardware/qcom-caf/bootctrl" remote="poco515" revision="ca6681cc5afcc712a24f4da64f54f4bf815ac7d0" upstream="refs/heads/alioth-5.15" />
   <project name="android_vendor_qcom_opensource_video-driver-5.15" path="kernel-research/alioth-5.15/sources/vendor/qcom/opensource/video-driver" remote="poco515" revision="f2803faf394c8bdc01b79bdab660404fb18ecb85" upstream="refs/heads/alioth-5.15" />
+  <remove-project path="hardware/qcom-caf/sm8250/display" optional="true" />
+  <project name="android_hardware_qcom_display-sm8250-5.15" path="hardware/qcom-caf/sm8250/display" remote="poco515" revision="b7374b57f8dcd52fbbbdc14b1d200a0e015efe1e" upstream="refs/heads/alioth-5.15" />
 </manifest>
