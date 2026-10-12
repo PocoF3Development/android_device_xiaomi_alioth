@@ -43,7 +43,12 @@ for partition in ['vendor', 'vendor_ramdisk']:
         for suffix in ['recovery', 'charger']:
             assert (directory / ('modules.load.'+suffix)).read_text().split() == early
 assert modules['vendor'] == modules['vendor_ramdisk']
-v = research / 'sources/vendor/qcom/opensource'
+source_v = research / 'sources/vendor/qcom/opensource'
+staging = json.loads((out / 'external-source-staging.json').read_text())
+v = Path(staging['staged_root']).resolve()
+assert v.is_relative_to(out / 'external')
+for group, revision in staging['source_heads'].items():
+    assert run(['git', '-C', source_v / group, 'rev-parse', 'HEAD']) == revision, group
 groups = ['mm-drivers/msm_ext_display', 'graphics-kernel', 'securemsm-kernel', 'display-drivers', 'audio-kernel/legacy', 'wlan/platform', 'wlan/qcacld-3.0', 'camera-kernel']
 # Preserve a private diagnostic staging directory; never remove Android outputs.
 stage = Path(tempfile.mkdtemp(prefix='alioth-source-abi-'))
@@ -59,6 +64,6 @@ symvers = stage / 'Module.symvers'
 symvers.write_bytes((out / 'Module.symvers').read_bytes()+b''.join((v / group / 'Module.symvers').read_bytes() for group in groups))
 result = subprocess.run(['depmod', '-e', '-E', str(symvers), '-b', str(stage), release], text=True, capture_output=True)
 assert result.returncode == 0 and not result.stderr.strip(), result.stderr
-report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'none', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'first_stage_modules': early, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
+report = {'kernel_head': head, 'release': release, 'compiler': next(line for line in config.splitlines() if line.startswith('CONFIG_CC_VERSION_TEXT=')), 'lto': 'none', 'image_sha256': digest(image), 'modules': len(expected), 'all_module_crcs_passed': True, 'partition_modules_identical': True, 'first_stage_modules': early, 'external_source_staging': staging, 'source_built': True, 'flashed': False, 'boot_validated': False, 'diagnostic_stage': str(stage)}
 (research / 'android-source-build-validation.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))

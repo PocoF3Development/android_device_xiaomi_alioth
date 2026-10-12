@@ -20,7 +20,9 @@ m evolution
 ```
 
 The external wrapper preserves dependency order: external display, graphics,
-securemsm, display, audio, WLAN platform, WLAN, camera. Depmod and required module
+securemsm, display, audio, WLAN platform, WLAN, camera. It stages driver sources
+under KERNEL_OBJ so Android can keep the checkout read-only; source revisions
+and content hashes are recorded with the output. Depmod and required module
 load lists must pass before packaging. Modules are packaged into both vendor and
 vendor ramdisk; first-stage/recovery/charger load the 24 essential modules and
 their dependencies, then vendor init loads the complete list after mounts.
