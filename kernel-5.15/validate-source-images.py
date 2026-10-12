@@ -40,6 +40,15 @@ config = run(['bash', kernel/'scripts/extract-ikconfig', image])
 assert config == (obj/'.config').read_bytes(), 'embedded configuration mismatch'
 assert b'Linux/arm64 5.15.206' in config and b'clang version 21.0.0' in config
 assert b'CONFIG_LTO_NONE=y\n' in config
+assert b'CONFIG_SECURITY_SELINUX_FORCE_PERMISSIVE=y\n' in config
+assert b'CONFIG_SECURITY_SELINUX_DEVELOP=y\n' in config
+# Check the actual header arguments, rather than only the makefile.
+vendor_header = (images/'vendor_boot.img').read_bytes()[:2112]
+assert vendor_header[:8] == b'VNDRBOOT'
+vendor_cmdline = vendor_header[28:2076].split(b'\0', 1)[0].decode().split()
+assert [x for x in vendor_cmdline if x.startswith('androidboot.usbcontroller=')] == ['androidboot.usbcontroller=a600000.usb']
+assert 'androidboot.selinux=permissive' in vendor_cmdline
+assert 'enforcing=0' in vendor_cmdline
 base = stage/'vendor_boot/dtb'
 expected = stage/'expected.dtb'
 shutil.copy2(obj/'arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dtb', expected)
@@ -71,6 +80,8 @@ report = {'release': (obj/'include/config/kernel.release').read_text().strip(),
           'packaged_kernel_and_config_match': True, 'source_dtb_and_overlay_match': True,
           'overlay_merge_passed': True, 'vendor_ramdisk_modules': len(modules),
           'module_metadata_matches': True, 'avb_images_verified': True,
+          'global_permissive_config_and_arguments': True,
+          'native_usb_controller_argument': 'a600000.usb',
           'images': {n: {'bytes': (images/n).stat().st_size, 'sha256': digest(images/n)}
                      for n in ('boot.img', 'vendor_boot.img', 'dtbo.img')},
           'flashed': False, 'hardware_boot_verified': False}
