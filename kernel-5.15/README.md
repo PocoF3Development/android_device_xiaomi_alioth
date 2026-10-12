@@ -10,7 +10,10 @@ and no LTO. The active native configuration lives in the kernel repository at
 The older local migration fragments are retained as reference. No exported kernel/module prebuilt bundle is required. Android's
 `generated_kernel_includes` runs native 5.15 `headers_install`; matching legacy
 audio, graphics and display UAPI is exported by the kernel source and checked
-against the active drivers. The donor buffer-sizing helpers are also exported.
+against the active drivers. The profile sets `TARGET_KERNEL_UAPI_AUTO_EXPORTS`
+so the pinned vendor/lineage generator declares the complete native UAPI output
+set and installs it inside sbox. After changing profiles in an existing checkout,
+use `SOONG_INCREMENTAL_ANALYSIS=false m evolution` for the first build. The donor buffer-sizing helpers are also exported.
 Native and driver compressed-audio layouts/ioctl values are checked for both
 Android ABIs with `validate-audio-uapi.py`.
 
@@ -34,8 +37,8 @@ DTB and DTBO are built from the same kernel output/configuration. The wildcard
 base board selector and board-44 overlay preserve the current experimental
 bootloader strategy. This does not establish a successful device boot.
 
-`manifest.xml` records all 12 core/driver/header repositories and the integration
-device/common branches. On a fresh checkout, use it as a local manifest after
+`manifest.xml` records 12 core/driver/header repositories, the integration
+device/common sources, boot control, display HAL and vendor/lineage build support. On a fresh checkout, use it as a local manifest after
 reconciling any existing projects at those paths; do not overwrite existing local
 work. Its copyfile installs the Kati research scan boundary. Existing Android
 Clang and Android platform dependencies remain supplied by the ROM manifest.
