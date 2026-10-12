@@ -18,7 +18,7 @@ TARGET_KERNEL_CLANG_VERSION := r563880c
 TARGET_KERNEL_CLANG_PATH := $(abspath prebuilts/clang/host/linux-x86/clang-$(TARGET_KERNEL_CLANG_VERSION))
 TARGET_KERNEL_ADDITIONAL_FLAGS := LLVM=1 LLVM_IAS=1
 ALIOTH_KERNEL_515_REQUIRED_FILES := $(addprefix $(TARGET_KERNEL_CLANG_PATH)/bin/,clang ld.lld llvm-ar llvm-nm llvm-objcopy llvm-strip) $(TARGET_KERNEL_SOURCE)/Makefile \
-    $(addprefix kernel-research/alioth-5.15/sources/vendor/qcom/opensource/,audio-kernel/legacy/Makefile display-drivers/Makefile graphics-kernel/Makefile securemsm-kernel/Makefile mm-drivers/msm_ext_display/Makefile camera-kernel/Makefile wlan/platform/Makefile wlan/qcacld-3.0/Makefile wlan/fw-api/fw/wmi_unified.h wlan/qca-wifi-host-cmn/os_if/linux/qca_vendor.h)
+    $(addprefix kernel-research/alioth-5.15/sources/vendor/qcom/opensource/,audio-kernel/legacy/Makefile display-drivers/Makefile graphics-kernel/Makefile securemsm-kernel/Makefile mm-drivers/msm_ext_display/Makefile camera-kernel/Makefile video-driver/Makefile wlan/platform/Makefile wlan/qcacld-3.0/Makefile wlan/fw-api/fw/wmi_unified.h wlan/qca-wifi-host-cmn/os_if/linux/qca_vendor.h)
 $(foreach file,$(ALIOTH_KERNEL_515_REQUIRED_FILES),$(if $(wildcard $(file)),,$(error Missing 5.15 build dependency $(file); sync kernel-5.15/manifest.xml)))
 TARGET_KERNEL_EXT_MODULE_ROOT := $(ALIOTH_KERNEL_515_PATH)
 TARGET_KERNEL_EXT_MODULES := external

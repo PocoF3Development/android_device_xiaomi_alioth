@@ -49,7 +49,7 @@ v = Path(staging['staged_root']).resolve()
 assert v.is_relative_to(out / 'external')
 for group, revision in staging['source_heads'].items():
     assert run(['git', '-C', source_v / group, 'rev-parse', 'HEAD']) == revision, group
-groups = ['mm-drivers/msm_ext_display', 'graphics-kernel', 'securemsm-kernel', 'display-drivers', 'audio-kernel/legacy', 'wlan/platform', 'wlan/qcacld-3.0', 'camera-kernel']
+groups = ['mm-drivers/msm_ext_display', 'graphics-kernel', 'securemsm-kernel', 'display-drivers', 'audio-kernel/legacy', 'wlan/platform', 'wlan/qcacld-3.0', 'camera-kernel', 'video-driver']
 # Preserve a private diagnostic staging directory; never remove Android outputs.
 stage = Path(tempfile.mkdtemp(prefix='alioth-source-abi-'))
 moddir = stage / 'lib/modules' / release

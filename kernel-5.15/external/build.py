@@ -23,7 +23,7 @@ for source, dest in [(v / 'audio-kernel/legacy/include/uapi/audio', k / 'include
 # under KERNEL_OBJ, preserving the vendor layout and cross-driver dependencies.
 roots = ['mm-drivers', 'graphics-kernel', 'securemsm-kernel', 'display-drivers',
          'audio-kernel/legacy', 'wlan/platform', 'wlan/qcacld-3.0', 'wlan/fw-api',
-         'wlan/qca-wifi-host-cmn', 'camera-kernel']
+         'wlan/qca-wifi-host-cmn', 'camera-kernel', 'video-driver']
 inventory = {}; revisions = {}; layout = hashlib.sha256()
 for relative in roots:
     source = v / relative
@@ -76,6 +76,7 @@ entries=[('ext-display',v/'mm-drivers/msm_ext_display',['MM_ROOT='+str(v/'mm-dri
 entries += [
  ('wlan-platform', v/'wlan/platform', ['WLAN_PLATFORM_ROOT='+str(v/'wlan/platform'), 'CONFIG_CNSS_OUT_OF_TREE=y', 'CONFIG_CNSS2=m', 'CONFIG_CNSS2_QMI=y', 'CONFIG_CNSS_UTILS=m', 'CONFIG_CNSS_QMI_SVC=m', 'CONFIG_CNSS_PLAT_IPC_QMI_SVC=m', 'CONFIG_CNSS_GENL=m', 'CONFIG_WCNSS_MEM_PRE_ALLOC=m']),
  ('wlan', v/'wlan/qcacld-3.0', ['CONFIG_QCA_CLD_WLAN=m', 'CONFIG_QCA_CLD_WLAN_PROFILE=qca6390', 'CONFIG_CNSS2=m', 'CONFIG_CNSS_OUT_OF_TREE=y', 'MODNAME=wlan', 'WLAN_ROOT='+str(v/'wlan/qcacld-3.0'), 'WLAN_PLATFORM_INC='+str(v/'wlan/platform/inc')]),
+ ('video', v/'video-driver', ['CONFIG_ARCH_KONA=y', 'VIDEO_ROOT='+str(v/'video-driver'), 'KERNEL_SRC='+str(k)]),
  ('camera', v/'camera-kernel', ['CONFIG_ARCH_KONA=y', 'CAMERA_KERNEL_ROOT='+str(v/'camera-kernel'), 'KERNEL_ROOT='+str(k), 'MODNAME=camera']),
 ]
 for name, root, flags in entries:
