@@ -8,6 +8,6 @@ PRODUCT_PACKAGES += toolbox_vendor
 PRODUCT_COPY_FILES += \
     device/xiaomi/alioth/kernel-5.15/init.alioth.modules.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.alioth.modules.rc
 PRODUCT_COPY_FILES += \
-    device/xiaomi/alioth/kernel-5.15/modules.load.early:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/modules.load.recovery \
-    device/xiaomi/alioth/kernel-5.15/modules.load.early:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/modules.load.charger
+    device/xiaomi/alioth/kernel-5.15/modules.load.recovery:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/modules.load.recovery \
+    device/xiaomi/alioth/kernel-5.15/modules.load.charger:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/modules.load.charger
 endif

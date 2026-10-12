@@ -41,7 +41,12 @@ for partition in ['vendor', 'vendor_ramdisk']:
     assert load == ([name.removesuffix('.ko') for name in expected] if partition == 'vendor' else early), (partition, load)
     if partition == 'vendor_ramdisk':
         for suffix in ['recovery', 'charger']:
-            assert (directory / ('modules.load.'+suffix)).read_text().split() == early
+            mode_load = (profile / ('modules.load.'+suffix)).read_text().split()
+            assert (directory / ('modules.load.'+suffix)).read_text().split() == mode_load
+            assert set(mode_load) <= {name.removesuffix('.ko') for name in expected}
+            assert set(early + ['phy-msm-snps-hs', 'phy-msm-ssusb-qmp', 'dwc3-msm', 'qpnp-pdphy']) <= set(mode_load)
+            if suffix == 'recovery':
+                assert mode_load == [name.removesuffix('.ko') for name in expected]
 assert modules['vendor'] == modules['vendor_ramdisk']
 source_v = research / 'sources/vendor/qcom/opensource'
 staging = json.loads((out / 'external-source-staging.json').read_text())

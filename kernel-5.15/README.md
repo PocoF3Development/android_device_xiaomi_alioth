@@ -30,8 +30,11 @@ securemsm, display, audio, WLAN platform, WLAN, video, camera. It stages driver 
 under KERNEL_OBJ so Android can keep the checkout read-only; source revisions
 and content hashes are recorded with the output. Depmod and required module
 load lists must pass before packaging. Modules are packaged into both vendor and
-vendor ramdisk; first-stage/recovery/charger load the 24 essential modules and
-their dependencies, then vendor init loads the complete list after mounts.
+vendor ramdisk; normal first-stage loads 24 essential modules and their dependencies.
+Recovery loads the complete matching list from ramdisk, including USB glue and
+PHY drivers, without relying on vendor post-fs-data actions. Charger uses a
+separate list with charging, power-off and USB support. Vendor init loads the
+complete list after mounts during normal Android boot.
 
 DTB and DTBO are built from the same kernel output/configuration. The wildcard
 base board selector and board-44 overlay preserve the current experimental
