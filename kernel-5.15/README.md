@@ -4,7 +4,10 @@ Development only; Android boot and full hardware functionality remain unverified
 
 The default profile builds Image, DTBs and all nine external driver groups from
 source with checkout Android Clang r563880c (LLVM 21), LLVM integrated assembly,
-and no LTO. No exported kernel/module prebuilt bundle is required. Android's
+and no LTO. The active native configuration lives in the kernel repository at
+`arch/arm64/configs/vendor/xiaomi/sm8250-common.config` and
+`arch/arm64/configs/vendor/xiaomi/alioth.config`, merged after GKI/Kona.
+The older local migration fragments are retained as reference. No exported kernel/module prebuilt bundle is required. Android's
 `generated_kernel_includes` runs native 5.15 `headers_install`; matching legacy
 audio, graphics and display UAPI is exported by the kernel source and checked
 against the active drivers. The donor buffer-sizing helpers are also exported.
