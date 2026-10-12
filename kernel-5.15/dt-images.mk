@@ -11,10 +11,12 @@ ALIOTH_KERNEL_515_LLVM_DEPS := $(addprefix $(TARGET_KERNEL_CLANG_PATH)/bin/,clan
 $(KERNEL_CONFIG): $(ALIOTH_KERNEL_515_LLVM_DEPS)
 $(TARGET_PREBUILT_INT_KERNEL): $(ALIOTH_KERNEL_515_SOURCE_DEPS) $(ALIOTH_KERNEL_515_GIT_DEPS) $(ALIOTH_KERNEL_515_LLVM_DEPS) $(ALIOTH_KERNEL_515_PATH)/external/Makefile $(ALIOTH_KERNEL_515_PATH)/external/build.py $(ALIOTH_KERNEL_515_PATH)/modules.mk
 ALIOTH_KERNEL_515_DTB := $(KERNEL_OUT)/arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dtb
-$(INSTALLED_DTBIMAGE_TARGET): $(TARGET_PREBUILT_INT_KERNEL) $(HOST_OUT_EXECUTABLES)/fdtput
+$(INSTALLED_DTBIMAGE_TARGET): $(TARGET_PREBUILT_INT_KERNEL) $(HOST_OUT_EXECUTABLES)/fdtput $(ALIOTH_KERNEL_515_PATH)/dt-images.mk
 	mkdir -p $(dir $@)
 	cp $(ALIOTH_KERNEL_515_DTB) $@
 	$(HOST_OUT_EXECUTABLES)/fdtput -t x $@ / qcom,board-id 0 0
+	# Root-only overlay has no references, but legacy UFDT requires symbols.
+	$(HOST_OUT_EXECUTABLES)/fdtput -c $@ /__symbols__
 $(BOARD_PREBUILT_DTBOIMAGE): $(TARGET_PREBUILT_INT_KERNEL) $(DTC) $(HOST_OUT_EXECUTABLES)/mkdtimg $(ALIOTH_KERNEL_515_PATH)/alioth-overlay.dts
 	mkdir -p $(dir $@)
 	$(DTC) -@ -I dts -O dtb -o $(dir $@)/alioth.dtbo $(ALIOTH_KERNEL_515_PATH)/alioth-overlay.dts

@@ -53,12 +53,15 @@ base = stage/'vendor_boot/dtb'
 expected = stage/'expected.dtb'
 shutil.copy2(obj/'arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dtb', expected)
 run(['fdtput', '-t', 'x', expected, '/', 'qcom,board-id', '0', '0'])
+run(['fdtput', '-c', expected, '/__symbols__'])
 assert base.read_bytes() == expected.read_bytes(), 'packaged source DTB mismatch'
 table = (images/'dtbo.img').read_bytes(); header = struct.unpack('>8I', table[:32])
 assert header[0] == 0xd7b7ab1e and header[4] == 1 and header[6] == 4096
 entry = struct.unpack('>8I', table[header[5]:header[5]+32]); assert entry[2:4] == (0, 0)
 overlay = stage/'overlay.dtbo'; overlay.write_bytes(table[entry[1]:entry[1]+entry[0]])
 assert overlay.read_bytes() == (product/'obj/DTBO_OBJ/alioth.dtbo').read_bytes()
+assert b'__symbols__' in run(['fdtget', '-l', base, '/']).splitlines()
+assert b'__fixups__' in run(['fdtget', '-l', overlay, '/']).splitlines()
 merged = stage/'merged.dtb'; run(['fdtoverlay', '-i', base, '-o', merged, overlay])
 assert run(['fdtget', '-t', 'x', base, '/', 'qcom,board-id']).strip() == b'0 0'
 assert run(['fdtget', '-t', 'x', merged, '/', 'qcom,board-id']).strip() == b'2c 0'
